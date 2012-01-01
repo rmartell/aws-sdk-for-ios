@@ -228,6 +228,8 @@ static const short base64DecodingTable[] =
                        @"video/ogv", @"ogv",
                        nil];
     }
+    
+    extension = [extension lowercaseString]; // tom fixed this bug..
     NSString *mimetype = (NSString *)[lookupTable objectForKey:extension];
     return mimetype == nil ? @"application/octet-stream" : mimetype;
 }
