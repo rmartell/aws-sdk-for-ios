@@ -68,7 +68,7 @@
 
     // HEAD special case
     if ([self.httpVerb isEqualToString:kHttpMethodHead]) {
-        [queryString appendFormat:@"%@=0", kS3QueryParamMaxKeys];
+        [queryString appendFormat:@"&%@=0", kS3QueryParamMaxKeys];
     }
 
     // Expires

@@ -241,7 +241,14 @@
     NSString         *signature   = (NSString *)[[auth componentsSeparatedByString:@":"] objectAtIndex:1];
     NSString         *queryString = [[preSignedURLRequest queryString] stringByAppendingFormat:@"&%@=%@", kS3QueryParamSignature, [AmazonSDKUtil urlEncode:signature]];
 
-    [preSignedURLRequest setSubResource:queryString];
+    
+    // Dont set the subresource, add to it...
+    NSString* current = preSignedURLRequest.subResource;
+    if (current == nil)
+        current = @"";
+    if ([current length] > 0 && (![current hasSuffix:@"&"] && ![queryString hasPrefix:@"&"]))
+        current = [current stringByAppendingString:@"&"];
+    [preSignedURLRequest setSubResource:[current stringByAppendingString:queryString]];
 
     return [AmazonSDKUtil URLWithURL:[preSignedURLRequest url] andProtocol:preSignedURLRequest.protocol];
 }
