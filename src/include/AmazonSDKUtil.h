@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -17,18 +17,27 @@
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#define AWS_SDK_USER_AGENT_FORMAT    @"aws-sdk-iOS/%@ %@/%@ %@"
 #else
 #import <Cocoa/Cocoa.h>
-#define AWS_SDK_USER_AGENT_FORMAT    @"aws-sdk-Mac/%@ %@/%@ %@"
 #endif
 
 #import "AmazonClientException.h"
 
-#define AWS_SDK_VERSION              @"1.0.4"
+#define AWS_SDK_VERSION              @"1.1.0"
+#define AWS_SDK_USER_AGENT_FORMAT    @"aws-sdk-iOS/%@ %@/%@ %@"
 #define kISO8061DateFormat           @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 #define kISO8601DateFormat           @"yyyy-MM-dd'T'HH:mm:ss'Z'"
 #define kRFC822DateFormat            @"EEE, dd MMM yyyy HH:mm:ss z"
+#define kDateStampFormat             @"yyyyMMdd"
+#define kDateTimeFormat              @"yyyyMMdd'T'HHmmss'Z'"
+
+// do this after so merging works better with existing ios code.
+#if TARGET_OS_IPHONE
+#define AWS_SDK_USER_AGENT_FORMAT    @"aws-sdk-iOS/%@ %@/%@ %@"
+#else
+#define AWS_SDK_USER_AGENT_FORMAT    @"aws-sdk-Mac/%@ %@/%@ %@"
+#endif
+
 
 @interface AmazonSDKUtil:NSObject {
 }
@@ -36,9 +45,13 @@
 +(NSString *)userAgentString;
 +(NSString *)MIMETypeForExtension:(NSString *)extension;
 +(NSString *)urlEncode:(NSString *)input;
++(NSData *)hexDecode:(NSString *)hexString;
++(NSString *)hexEncode:(NSString *)string;
++(NSString *)hexEncodeData:(NSData *)data;
 +(NSNumber *)convertStringToNumber:(NSString *)string;
 +(NSDate *)convertStringToDate:(NSString *)string;
 +(NSDate *)convertStringToDate:(NSString *)string usingFormat:(NSString *)dateFormat;
++(NSDate *)millisSinceEpochToDate:(NSNumber *)millisSinceEpoch;
 +(NSURL *)URLWithURL:(NSURL *)theURL andProtocol:(NSString *)theProtocol;
 +(NSLocale *)timestampLocale;
 @end
@@ -50,6 +63,10 @@
 -(NSString *)stringWithRFC822Format;
 +(NSDate *)dateWithISO8061Format:(NSString *)dateString;
 +(NSString *)ISO8061FormattedCurrentTimestamp;
+-(NSString *)dateStamp;
+-(NSString *)dateTime;
+
+
 
 @end
 
