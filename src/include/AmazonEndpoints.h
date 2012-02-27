@@ -89,7 +89,7 @@ typedef enum
 //#define AMAZON_SES_AP_NORTHEAST_1_ENDPOINT		@"http://"
 //#define AMAZON_SES_SA_EAST_1_ENDPOINT             @"http://"
 
-#define AMAZON_DDB_US_EAST_1_ENDPOINT               @"http://dynamodb.us-east-1.amazonaws.com"
+#define AMAZON_DDB_US_EAST_1_ENDPOINT    @"http://dynamodb.us-east-1.amazonaws.com"
 //#define AMAZON_DDB_US_WEST_1_ENDPOINT             @"http://"
 //#define AMAZON_DDB_US_WEST_2_ENDPOINT             @"http://"
 //#define AMAZON_DDB_EU_WEST_1_ENDPOINT             @"http://"
@@ -171,7 +171,7 @@ typedef enum
 //#define AMAZON_SES_AP_NORTHEAST_1_ENDPOINT_SECURE	 @"https://"
 //#define AMAZON_SES_SA_EAST_1_ENDPOINT_SECURE       @"https://"
 
-#define AMAZON_DDB_US_EAST_1_ENDPOINT_SECURE         @"https://dynamodb.us-east-1.amazonaws.com"
+#define AMAZON_DDB_US_EAST_1_ENDPOINT_SECURE    @"https://dynamodb.us-east-1.amazonaws.com"
 //#define AMAZON_DDB_US_WEST_1_ENDPOINT_SECURE		 @"https://"
 //#define AMAZON_DDB_US_WEST_2_ENDPOINT_SECURE		 @"https://"
 //#define AMAZON_DDB_EU_WEST_1_ENDPOINT_SECURE		 @"https://"
@@ -195,6 +195,7 @@ typedef enum
 #define AMAZON_ELB_AP_NORTHEAST_1_ENDPOINT_SECURE    @"https://elasticloadbalancing.ap-northeast-1.amazonaws.com"
 #define AMAZON_ELB_SA_EAST_1_ENDPOINT_SECURE         @"https://elasticloadbalancing.sa-east-1.amazonaws.com"
 
+#define AMAZON_STS_ENDPOINT_SECURE    @"https://sts.amazonaws.com"
 
 
 @interface AmazonEndpoints:NSObject {
@@ -209,6 +210,6 @@ typedef enum
 +(NSString *)sesEndpoint:(AmazonRegion)region secure:(bool)useSSL;
 +(NSString *)elbEndpoint:(AmazonRegion)region secure:(bool)useSSL;
 +(NSString *)autoscalingEndpoint:(AmazonRegion)region secure:(bool)useSSL;
-
++(NSString *)stsEndpoint;
 
 @end
